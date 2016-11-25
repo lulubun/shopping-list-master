@@ -44,14 +44,15 @@ function renderItem(stateItem, index) {
   // check if an item is checked, in which case add class to show visual check
     if (state.items[index].checked == true) {
         item.addClass('shopping-item__checked');
+    }    
   return item;
 }
 
 $(function() {
   registerItemCheckHandler();
+  registerItemDelete();
 	$('#js-shopping-list-form').submit(function(event) {
     	event.preventDefault();
-      registerItemCheckHandler();
     	addItem($('#shopping-list-entry').val());
     	renderList();
 	});
@@ -66,17 +67,20 @@ function registerItemCheckHandler() {
         // clicked list items
         var li = $(this).closest('li');
         // add class to make item visually checked
-      li.addClass('shopping-item__checked');
         // logic to update our in memory state to reflect that item has been checked
         var liId = li.attr('id');
         toggleItemStatus(liId);
+        renderList();
   });
 
 }
 
 function registerItemDelete() {
-  $('ul').on('click', '.js-shopping-item-delete', function(event)){
+  $('ul').on('click', '.js-shopping-item-delete', function(event) {
     var liDel = $(this).closest('li');
-    li.remove('li');
-  }
+    var delLi = liDel.attr('id');
+    state.items.splice(delLi, 1);   
+    renderList();
+  });
 }
+
