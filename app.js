@@ -16,13 +16,12 @@ var itemTemplate = (
   '</li>'
 );
 
-
 function addItem(item) {
 	state.items.push({
 		displayName: item,
 		checked: false
 	});
-};
+}
 
 function toggleItemStatus(index) {
     state.items[index].checked = !state.items[index].checked;
@@ -43,7 +42,8 @@ function renderItem(stateItem, index) {
 	item.attr('id', index);
   // check if an item is checked, in which case add class to show visual check
     if (state.items[index].checked == true) {
-        item.addClass('shopping-item__checked');
+      item.addClass('shopping-item__checked');
+    }
   return item;
 }
 
@@ -71,12 +71,11 @@ function registerItemCheckHandler() {
         var liId = li.attr('id');
         toggleItemStatus(liId);
   });
-
 }
 
 function registerItemDelete() {
-  $('ul').on('click', '.js-shopping-item-delete', function(event)){
+  $('ul').on('click', '.js-shopping-item-delete', function(event) {
     var liDel = $(this).closest('li');
     li.remove('li');
-  }
+  });
 }
