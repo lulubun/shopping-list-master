@@ -20,7 +20,7 @@ var itemTemplate = (
 function addItem(item) {
 	state.items.push({
 		displayName: item,
-		checked: false;
+		checked: false
 	});
 };
 
@@ -72,4 +72,11 @@ function registerItemCheckHandler() {
         toggleItemStatus(liId);
   });
 
+}
+
+function registerItemDelete() {
+  $('ul').on('click', '.js-shopping-item-delete', function(event)){
+    var liDel = $(this).closest('li');
+    li.remove('li');
+  }
 }
